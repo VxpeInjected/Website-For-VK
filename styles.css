@@ -1,0 +1,89 @@
+/* reset & basics */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Header/Hero */
+.hero {
+  background: url('https://via.placeholder.com/1200x600') center/cover no-repeat;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+.hero-content {
+  background: rgba(0,0,0,0.4);
+  padding: 2rem;
+}
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #00a6a6;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.btn:hover {
+  background: #008c8c;
+}
+
+/* Products Section */
+.products {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.product-grid {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+.product {
+  max-width: 300px;
+}
+.product img {
+  width: 100%;
+  border-radius: 8px;
+}
+.product h3 {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+.product p {
+  margin: 0.5rem 0 1rem;
+}
+
+/* Info Section */
+.info {
+  padding: 4rem 2rem;
+  background: #f5f5f5;
+  text-align: center;
+}
+.info h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Footer */
+.site-footer {
+  padding: 2rem;
+  text-align: center;
+  background: #222;
+  color: white;
+}
