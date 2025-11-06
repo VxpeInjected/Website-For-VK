@@ -1,70 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Neonix</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1 class="logo">Neonix</h1>
-    <div class="promo-banner">
-      <span class="crossed">All Products 50% Off!</span>
+  <!-- Top Banner -->
+  <div class="top-banner">
+    Unofficial Copyright © Neonix 2025
+  </div>
+
+  <!-- Sale Banner -->
+  <div class="sale-banner">
+    <s>All Products 50% Off!</s>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>We Bring Ideas To Life</h1>
+      <p>Neonix builds next-gen digital experiences for modern creators.</p>
+      <button id="discover-btn">Discover More</button>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section class="hero">
-      <div class="hero-content">
-        <h2>We Bring Ideas To Life</h2>
-        <p>Neonix builds next-gen digital solutions for modern businesses.</p>
-        <button id="discoverBtn">Discover More</button>
-      </div>
-    </section>
+  <!-- Expertise Section -->
+  <section class="expertise">
+    <h2>Our Expertise</h2>
+    <div class="expertise-cards">
+      <div class="card">Design & Branding</div>
+      <div class="card">Automation & Scripts</div>
+      <div class="card">Web & UI Development</div>
+    </div>
+  </section>
 
-    <section class="expertise">
-      <h2>Our Expertise</h2>
-      <div class="expertise-grid">
-        <div class="card">
-          <h3>Web Design</h3>
-          <p>Clean, modern, and optimized for performance.</p>
-        </div>
-        <div class="card">
-          <h3>Automation</h3>
-          <p>Smart workflows that save you time and money.</p>
-        </div>
-        <div class="card">
-          <h3>Brand Identity</h3>
-          <p>Visuals that make your brand stand out.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>Unofficial Copyright © Neonix 2025</p>
-  </footer>
-
+  <!-- Popup -->
   <div id="popup" class="popup">
     <div class="popup-content">
       <p>Oops! We're working on this page right now.</p>
-      <button id="closePopup">Close</button>
+      <button id="close-popup">Close</button>
     </div>
   </div>
 
   <script>
-    const popup = document.getElementById('popup');
-    const discoverBtn = document.getElementById('discoverBtn');
-    const closePopup = document.getElementById('closePopup');
+    const popup = document.getElementById("popup");
+    const discoverBtn = document.getElementById("discover-btn");
+    const closePopup = document.getElementById("close-popup");
 
-    discoverBtn.addEventListener('click', () => {
-      popup.style.display = 'flex';
-    });
-
-    closePopup.addEventListener('click', () => {
-      popup.style.display = 'none';
-    });
+    discoverBtn.addEventListener("click", () => popup.classList.add("show"));
+    closePopup.addEventListener("click", () => popup.classList.remove("show"));
   </script>
 </body>
 </html>
