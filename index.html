@@ -1,56 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neonix — Modern Digital Agency</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neonix</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="background">
-    <div class="pattern"></div>
-  </div>
-
-  <header class="navbar">
-    <h1 class="logo">Neon<span>ix</span></h1>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+  <header>
+    <h1 class="logo">Neonix</h1>
+    <div class="promo-banner">
+      <span class="crossed">All Products 50% Off!</span>
+    </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h2>Empowering Brands Through Design & Technology</h2>
-      <p>We create immersive digital experiences that elevate your business to the next level.</p>
-      <a href="#services" class="btn">Discover More</a>
-    </div>
-  </section>
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h2>We Bring Ideas To Life</h2>
+        <p>Neonix builds next-gen digital solutions for modern businesses.</p>
+        <button id="discoverBtn">Discover More</button>
+      </div>
+    </section>
 
-  <section id="services" class="services">
-    <h2>Our Expertise</h2>
-    <div class="service-grid">
-      <div class="card">
-        <h3>UI/UX Design</h3>
-        <p>Crafting seamless digital interfaces that users love to interact with.</p>
+    <section class="expertise">
+      <h2>Our Expertise</h2>
+      <div class="expertise-grid">
+        <div class="card">
+          <h3>Web Design</h3>
+          <p>Clean, modern, and optimized for performance.</p>
+        </div>
+        <div class="card">
+          <h3>Automation</h3>
+          <p>Smart workflows that save you time and money.</p>
+        </div>
+        <div class="card">
+          <h3>Brand Identity</h3>
+          <p>Visuals that make your brand stand out.</p>
+        </div>
       </div>
-      <div class="card">
-        <h3>Web Development</h3>
-        <p>Building high-performance websites optimized for speed and elegance.</p>
-      </div>
-      <div class="card">
-        <h3>Automation & AI</h3>
-        <p>Modern solutions powered by intelligent automation and smart systems.</p>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <footer id="contact" class="footer">
-    <p>Contact us: <a href="mailto:contact@neonix.dev">contact@neonix.dev</a></p>
-    <p>© 2025 Neonix. All rights reserved.</p>
+  <footer>
+    <p>Unofficial Copyright © Neonix 2025</p>
   </footer>
+
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <p>Oops! We're working on this page right now.</p>
+      <button id="closePopup">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const popup = document.getElementById('popup');
+    const discoverBtn = document.getElementById('discoverBtn');
+    const closePopup = document.getElementById('closePopup');
+
+    discoverBtn.addEventListener('click', () => {
+      popup.style.display = 'flex';
+    });
+
+    closePopup.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
