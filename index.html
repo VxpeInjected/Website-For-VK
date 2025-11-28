@@ -1,57 +1,348 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neonix</title>
-  <link rel="stylesheet" href="style-v2.css?v=2">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Full O'Flavour — Chips & Crunch Emporium</title>
+  <meta name="description" content="Full O'Flavour — Loud, proud chips with attitude. Bright, animated, big-ass site." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23ffcc00'/%3E%3Ctext x='50' y='58' font-size='40' text-anchor='middle' font-family='Arial' fill='%23b33' %3E%F0%9F%8D%9C%3C/text%3E%3C/svg%3E">
+  <style>
+    :root{
+      --bg:#0f0c1a; --neon1:#ff6b6b; --neon2:#ffd93d; --neon3:#6bffb8; --glass: rgba(255,255,255,0.06);
+      --accent: linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3));
+      --glow: 0 8px 30px rgba(99,0,255,0.12), inset 0 -4px 30px rgba(255,255,255,0.02);
+      font-synthesis: none;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background: radial-gradient(1200px 600px at 10% 10%, rgba(255,107,107,0.08), transparent), radial-gradient(900px 400px at 90% 90%, rgba(107,255,184,0.05), transparent), var(--bg); color:#fff; font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,'Helvetica Neue',Arial;}
+    a{color:inherit}
+
+    /* Layout */
+    .wrap{max-width:1400px;margin:0 auto;padding:36px}
+    header{display:flex;align-items:center;gap:20px;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:1px}
+    .logo .mark{width:64px;height:64px;border-radius:12px;background:var(--neon2);display:grid;place-items:center;font-size:30px;color:#4a1300;box-shadow:0 10px 30px rgba(255,217,61,0.14),0 0 40px rgba(255,107,107,0.06);transform:rotate(-12deg)}
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{padding:10px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);backdrop-filter: blur(6px);transition:all 280ms;}
+    nav a:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 14px 40px rgba(0,0,0,0.5),0 0 18px rgba(255,107,107,0.12);border-color:rgba(255,255,255,0.08)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 460px;gap:34px;align-items:center;margin-top:28px}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:32px;border-radius:24px;box-shadow:var(--glow);position:relative;border:1px solid rgba(255,255,255,0.03);overflow:hidden}
+    h1{font-size:48px;margin:0 0 10px;line-height:1.01;background:var(--accent);-webkit-background-clip:text;background-clip:text;color:transparent}
+    p.lead{opacity:0.9;margin:0 0 18px}
+    .cta-row{display:flex;gap:12px}
+    .btn{padding:14px 18px;border-radius:14px;font-weight:700;border:none;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,0.45);transform:translateZ(0);}
+    .btn.primary{background:var(--neon1);color:#240202}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.08)}
+
+    /* Animated chips */
+    .chip-wall{position:absolute;inset:0;pointer-events:none}
+    .chip{position:absolute;width:120px;height:120px;background:conic-gradient(from 120deg,var(--neon1),var(--neon2),var(--neon3));border-radius:50%;display:grid;place-items:center;font-size:22px;font-weight:900;color:#2b0202;filter:drop-shadow(0 12px 30px rgba(0,0,0,0.35));}
+
+    /* Right column: showcase */
+    .showcase{padding:20px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.012), transparent);height:100%;display:flex;flex-direction:column;gap:12px}
+    .preview{flex:1;border-radius:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .card-mini{border-radius:10px;padding:10px;background:rgba(255,255,255,0.02);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+
+    /* Products */
+    .products{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .product{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));border-radius:18px;padding:18px;min-height:240px;position:relative;overflow:hidden}
+    .product h3{margin:0 0 8px}
+    .price{font-weight:900;color:#fff}
+    .flavour-tag{position:absolute;left:-40px;top:22px;transform:rotate(-12deg);background:var(--neon3);color:#011;padding:8px 22px;border-radius:8px;font-weight:800}
+
+    /* Fancy features list */
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}
+    .feature{background:var(--glass);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+
+    /* Footer & Contact */
+    footer{margin-top:36px;padding:24px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));display:flex;gap:20px}
+    .socials{display:flex;gap:12px}
+    .social{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,0.02);}
+
+    /* Contact form */
+    .contact-wrap{display:flex;gap:20px;align-items:flex-start}
+    form{flex:1;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px}
+    input,textarea,select{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit;margin-bottom:12px}
+    .submit{display:inline-flex;align-items:center;gap:10px}
+
+    /* micro-animations */
+    .float{animation:float 6s ease-in-out infinite}
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-16px)}100%{transform:translateY(0)}}
+    .swing{animation:swing 3.6s cubic-bezier(.25,.9,.28,1) infinite}
+    @keyframes swing{0%{transform:rotate(-4deg)}50%{transform:rotate(6deg)}100%{transform:rotate(-4deg)}}
+
+    /* Everything pop */
+    *[data-animated]{animation:pop .9s cubic-bezier(.22,.9,.26,1) both}
+    @keyframes pop{0%{opacity:0;transform:scale(.86) translateY(6px)}100%{opacity:1;transform:none}}
+
+    /* responsive */
+    @media (max-width:1000px){.hero{grid-template-columns:1fr;}.products{grid-template-columns:repeat(2,1fr)}.wrap{padding:18px}}
+    @media (max-width:700px){.products{grid-template-columns:1fr}} 
+
+    /* fun cursor */
+    body{cursor:none}
+    .cursor{position:fixed;pointer-events:none;width:36px;height:36px;border-radius:50%;transform:translate(-50%,-50%);display:grid;place-items:center;font-weight:900;font-size:14px;z-index:9999}
+
+    /* marquee */
+    .ticker{margin-top:18px;padding:6px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));overflow:hidden}
+    .ticker .track{display:inline-block;white-space:nowrap;padding-right:100%}
+    .ticker span{display:inline-block;margin-right:56px;font-weight:800}
+    .track{animation:marquee 22s linear infinite}
+    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* easter egg */
+    .easter{position:fixed;right:18px;bottom:18px;background:var(--neon1);padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:800}
+  </style>
 </head>
 <body>
-  <!-- Top Banner -->
-  <div class="top-banner">
-    Unofficial Copyright © Neonix 2025
+  <div class="wrap">
+    <header data-animated>
+      <div class="logo">
+        <div class="mark swing">🍟</div>
+        <div>
+          <div style="font-size:20px">Full O'Flavour</div>
+          <div style="font-size:12px;opacity:.7">Chips & Crunch Emporium</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#products">Products</a>
+        <a href="#features">Features</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+        <a id="demo-btn" class="btn ghost">Taste the vibes</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-card" id="hero-card">
+          <div class="chip-wall" aria-hidden>
+            <!-- JS will place animated chips here -->
+          </div>
+          <h1 data-animated>Big Taste. Bigger Personality.</h1>
+          <p class="lead" data-animated>Full O'Flavour makes ridiculously tasty, outrageously crunchy chips for people who don't do subtle. Natural ingredients, amplified seasoning, zero compromise.</p>
+          <div class="cta-row" data-animated>
+            <button class="btn primary" id="buy-now">Shop the Crunch</button>
+            <button class="btn ghost" id="learn-more">See Flavours</button>
+          </div>
+          <div class="ticker" aria-hidden>
+            <div class="track">
+              <span>NEW: GlowSalt — electric lemon zing ⚡</span>
+              <span>LIMITED: Midnight BBQ — smoky as midnight 🔥</span>
+              <span>VEGAN: Herbsplosion — herb bomb 🌿</span>
+              <span>SPICY: Lava Crunch — not for the faint 🌶️</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="showcase" data-animated>
+          <div class="preview">
+            <div class="card-mini float">
+              <div style="font-size:26px;font-weight:900">Featured</div>
+              <div style="opacity:.85">GlowSalt</div>
+            </div>
+            <div class="card-mini swing">
+              <div style="font-size:26px;font-weight:900">Limited</div>
+              <div style="opacity:.85">Midnight BBQ</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;justify-content:space-between">
+            <div style="font-weight:900">Crunch meter</div>
+            <div id="crunch-meter" style="font-weight:800">🔥🔥🔥🔥</div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="products" class="products" data-animated>
+        <article class="product" tabindex="0">
+          <div class="flavour-tag">GlowSalt</div>
+          <h3>GlowSalt — Electric Lemon</h3>
+          <p>Bright citrus salt fused with sea crystals. Pops on the tongue.</p>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:12px">
+            <div class="price">$3.49</div>
+            <button class="btn primary" onclick="addToCart('GlowSalt')">Add</button>
+          </div>
+        </article>
+
+        <article class="product" tabindex="0">
+          <div class="flavour-tag">Midnight BBQ</div>
+          <h3>Midnight BBQ — Smoked & Sweet</h3>
+          <p>Deep smoke, molasses hit, long finish. Midnight approved.</p>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:12px">
+            <div class="price">$4.29</div>
+            <button class="btn primary" onclick="addToCart('Midnight BBQ')">Add</button>
+          </div>
+        </article>
+
+        <article class="product" tabindex="0">
+          <div class="flavour-tag">Lava Crunch</div>
+          <h3>Lava Crunch — Devil's Heat</h3>
+          <p>Capsaicin-forward. Warning: tears may occur.</p>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:12px">
+            <div class="price">$3.99</div>
+            <button class="btn primary" onclick="addToCart('Lava Crunch')">Add</button>
+          </div>
+        </article>
+      </section>
+
+      <section id="features" class="features">
+        <div class="feature" data-animated>
+          <h4>Subscription Box</h4>
+          <p>Get curated flavours monthly: surprise seasonals, hot exclusives.</p>
+        </div>
+        <div class="feature" data-animated>
+          <h4>Build-a-Bag</h4>
+          <p>Mix your own pack. Pick 3 flavours, name it, and we print a sticker.</p>
+        </div>
+        <div class="feature" data-animated>
+          <h4>Party Packs</h4>
+          <p>Gigantic bulk bags for DJs, parties, and karaoke champions.</p>
+        </div>
+        <div class="feature" data-animated>
+          <h4>AR Try-On</h4>
+          <p>Use your camera (coming soon!) to see the chips look on your table in AR.</p>
+        </div>
+      </section>
+
+      <section id="about" style="margin-top:28px;display:flex;gap:20px;align-items:flex-start">
+        <div style="flex:1" data-animated>
+          <h2>About Full O'Flavour</h2>
+          <p>Founded by snack rebels. We love flavour — and making mouths happy. No artificial cowardice.</p>
+          <div style="display:flex;gap:12px;margin-top:12px">
+            <button class="btn ghost" onclick="openShop()">Shop now</button>
+            <button class="btn" onclick="surprise()">Surprise me</button>
+          </div>
+        </div>
+        <div style="width:420px" data-animated>
+          <div class="contact-wrap">
+            <form id="contact-form">
+              <input name="name" placeholder="Your name" required />
+              <input name="email" type="email" placeholder="you@internet.com" required />
+              <select name="topic">
+                <option>General</option>
+                <option>Wholesale</option>
+                <option>Collab / Influencer</option>
+                <option>Press</option>
+              </select>
+              <textarea name="message" placeholder="Tell us what's up" rows="4" required></textarea>
+              <div style="display:flex;gap:8px;align-items:center">
+                <button class="btn primary submit" type="submit">Send message</button>
+                <div id="contact-status" style="opacity:.9;font-weight:700"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" style="margin-top:28px">
+        <footer>
+          <div style="flex:1">
+            <div style="font-weight:900">Where to find us</div>
+            <p style="margin:8px 0 0">Online & in stores. Pop-up events, markets, and aggressive flavour sampling.</p>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center" class="socials">
+              <a class="social" href="https://twitter.com/" target="_blank" aria-label="Twitter">🐦</a>
+              <a class="social" href="https://instagram.com/" target="_blank" aria-label="Instagram">📸</a>
+              <a class="social" href="https://facebook.com/" target="_blank" aria-label="Facebook">📘</a>
+              <a class="social" href="https://tiktok.com/" target="_blank" aria-label="TikTok">🎵</a>
+            </div>
+          </div>
+
+          <div style="width:360px">
+            <div style="font-weight:900">Newsletter</div>
+            <p style="margin:6px 0">Be loud. Get discounts & secret flavours.</p>
+            <form id="newsletter">
+              <input placeholder="email@you.com" name="email" type="email" required />
+              <div style="display:flex;gap:8px;margin-top:8px"><button class="btn primary">Subscribe</button><button class="btn ghost" type="button" onclick="toggleTheme()">Theme</button></div>
+            </form>
+          </div>
+        </footer>
+      </section>
+    </main>
   </div>
 
-  <!-- Sale Banner -->
-  <div class="sale-banner">
-    <s>All Products 50% Off!</s>
-  </div>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>We Bring Ideas To Life</h1>
-      <p>Neonix builds next-gen digital experiences for modern creators.</p>
-      <button id="discover-btn">Discover More</button>
-    </div>
-  </section>
-
-  <!-- Expertise Section -->
-  <section class="expertise">
-    <h2>Our Expertise</h2>
-    <div class="expertise-cards">
-      <div class="card">Design & Branding</div>
-      <div class="card">Automation & Scripts</div>
-      <div class="card">Web & UI Development</div>
-    </div>
-  </section>
-
-  <!-- Popup -->
-  <div id="popup" class="popup">
-    <div class="popup-content">
-      <p>Oops! We're working on this page right now.</p>
-      <button id="close-popup">Close</button>
-    </div>
-  </div>
+  <div class="cursor" id="cursor">🍟</div>
+  <button class="easter" id="easter">EAT</button>
 
   <script>
-    const popup = document.getElementById("popup");
-    const discoverBtn = document.getElementById("discover-btn");
-    const closePopup = document.getElementById("close-popup");
+    /* Utility & animations */
+    const rand = (a,b)=>Math.random()*(b-a)+a
+    // Create floating chips
+    const chipWall = document.querySelector('.chip-wall')
+    const flavours=['GlowSalt','Midnight BBQ','Lava Crunch','Herbsplosion','Tangy Tango','Salt & Whisper']
+    for(let i=0;i<10;i++){
+      const c=document.createElement('div');c.className='chip float';
+      c.style.left=rand(2,90)+'%';c.style.top=rand(2,90)+'%';c.style.width=rand(64,140)+'px';c.style.height=c.style.width;
+      c.style.animationDuration=rand(4,9)+'s';c.style.opacity=0.95*rand(0.6,1)
+      c.textContent=flavours[Math.floor(rand(0,flavours.length))]
+      chipWall.appendChild(c)
+    }
 
-    discoverBtn.addEventListener("click", () => popup.classList.add("show"));
-    closePopup.addEventListener("click", () => popup.classList.remove("show"));
+    // Cursor
+    const cursor=document.getElementById('cursor')
+    window.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'})
+
+    // Add-to-cart playful
+    window.addToCart=(name)=>{
+      const el=document.createElement('div');el.style.position='fixed';el.style.left=window.innerWidth/2+'px';el.style.top=window.innerHeight/2+'px';el.style.padding='18px 26px';el.style.borderRadius='14px';el.style.background='linear-gradient(90deg,#ff6b6b,#ffd93d)';el.style.transform='translate(-50%,-50%) scale(0.4)';el.style.color='#240202';el.style.fontWeight=900;el.innerText=`Added ${name}!`;
+      document.body.appendChild(el);
+      requestAnimationFrame(()=>{el.style.transition='transform .7s cubic-bezier(.22,.9,.28,1),opacity .7s';el.style.transform='translate(-50%,-120%) scale(1)';el.style.opacity=1});
+      setTimeout(()=>{el.style.opacity=0;el.style.transform='translate(-50%,-200%) scale(.9)';setTimeout(()=>el.remove(),900)},1600)
+    }
+
+    // Contact form (local demo)
+    const contact = document.getElementById('contact-form')
+    contact.addEventListener('submit',e=>{
+      e.preventDefault();
+      const data = new FormData(contact);const name=data.get('name');const email=data.get('email');const msg=data.get('message');
+      // fake send + visual feedback
+      const status = document.getElementById('contact-status');status.innerText='Sending...';
+      setTimeout(()=>{status.innerText='Message sent — we will crunch on it!';contact.reset();setTimeout(()=>status.innerText='',4200)},900)
+    })
+
+    // Newsletter
+    document.getElementById('newsletter').addEventListener('submit',e=>{e.preventDefault();alert('Subscribed — behold tiny discounts!')})
+
+    // Demo buttons
+    function openShop(){location.hash='#products';document.getElementById('buy-now').scrollIntoView({behavior:'smooth'})}
+    function surprise(){const names=['GlowSalt','Midnight BBQ','Lava Crunch','Herbsplosion'];alert('Surprise pick: '+names[Math.floor(Math.random()*names.length)])}
+    document.getElementById('demo-btn').addEventListener('click',()=>{surprise()})
+
+    // animated entrance
+    document.querySelectorAll('[data-animated]').forEach((el,i)=>{el.style.animationDelay=(i*80)+'ms'})
+
+    // Crunch meter playful
+    const crunchMeter=document.getElementById('crunch-meter');setInterval(()=>{crunchMeter.innerText='🔥'.repeat(1+Math.floor(Math.random()*5))},1200)
+
+    // Toast confetti on load
+    window.addEventListener('load',()=>{confettiBurst(32)})
+    function confettiBurst(n){for(let i=0;i<n;i++){const p=document.createElement('div');p.style.position='fixed';p.style.left=(50+Math.random()*600-300)+'px';p.style.top=(40+Math.random()*200)+'px';p.style.width='12px';p.style.height='8px';p.style.opacity=0.95;p.style.borderRadius='4px';p.style.transform='translateY(0) rotate('+Math.random()*360+'deg)';p.style.background=['#ff6b6b','#ffd93d','#6bffb8'][Math.floor(Math.random()*3)];p.style.zIndex=9999;document.body.appendChild(p);const dx=(Math.random()-0.5)*120;const dy=400+Math.random()*600;p.animate([{transform:'translateY(0) rotate(0deg)',opacity:1},{transform:`translate(${dx}px,${dy}px) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:1200+Math.random()*800,easing:'cubic-bezier(.2,.7,.2,1)'});setTimeout(()=>p.remove(),2200)}}
+
+    // Keyboard easter egg
+    document.getElementById('easter').addEventListener('click',()=>{surprise();confettiBurst(64)})
+    document.addEventListener('keydown',e=>{if(e.key==='f'){confettiBurst(40)}})
+
+    // Theme toggler (switch gradients & background)
+    function toggleTheme(){document.documentElement.style.setProperty('--bg', document.documentElement.style.getPropertyValue('--bg')==='#0f0c1a' ? '#061018' : '#0f0c1a')}
+    window.toggleTheme=toggleTheme
+
+    // Accessibility: focus outlines
+    document.body.addEventListener('keydown',e=>{if(e.key==='Tab')document.body.classList.add('show-focus')})
+
+    // Lazy micro-animations when scrolled into view
+    const obs = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('pop');e.target.style.opacity=1;}})},{threshold:0.12})
+    document.querySelectorAll('.product, .feature').forEach(n=>{n.style.opacity=0;obs.observe(n)})
+
+    // Make everything 'animated' by toggling attribute on load for dramatic delay
+    setTimeout(()=>{document.querySelectorAll('[data-animated]').forEach(el=>el.setAttribute('data-animated','on'))},120)
+
+    // GitHub Pages ready: add simple offline CTA
+    const btn=document.createElement('button');btn.textContent='Download menu (PNG)';btn.className='btn ghost';btn.style.position='fixed';btn.style.left='18px';btn.style.bottom='18px';btn.onclick=()=>downloadMenu();document.body.appendChild(btn)
+    function downloadMenu(){const svg=`<svg xmlns='http://www.w3.org/2000/svg' width='800' height='1000'><rect width='100%' height='100%' fill='#06060b'/><text x='50' y='80' fill='white' font-size='40' font-family='Arial'>Full O\'Flavour Menu</text></svg>`;const blob=new Blob([svg],{type:'image/svg+xml'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='FullOFlavour-menu.svg';a.click();URL.revokeObjectURL(url)}
+
+    // small AR-like table preview (CSS only)
+    // No external libs: everything self-contained to be Github Pages friendly.
   </script>
 </body>
 </html>
-
