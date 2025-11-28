@@ -1,348 +1,960 @@
 <!doctype html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Full O'Flavour — Chips & Crunch Emporium</title>
-  <meta name="description" content="Full O'Flavour — Loud, proud chips with attitude. Bright, animated, big-ass site." />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23ffcc00'/%3E%3Ctext x='50' y='58' font-size='40' text-anchor='middle' font-family='Arial' fill='%23b33' %3E%F0%9F%8D%9C%3C/text%3E%3C/svg%3E">
-  <style>
-    :root{
-      --bg:#0f0c1a; --neon1:#ff6b6b; --neon2:#ffd93d; --neon3:#6bffb8; --glass: rgba(255,255,255,0.06);
-      --accent: linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3));
-      --glow: 0 8px 30px rgba(99,0,255,0.12), inset 0 -4px 30px rgba(255,255,255,0.02);
-      font-synthesis: none;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background: radial-gradient(1200px 600px at 10% 10%, rgba(255,107,107,0.08), transparent), radial-gradient(900px 400px at 90% 90%, rgba(107,255,184,0.05), transparent), var(--bg); color:#fff; font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,'Helvetica Neue',Arial;}
-    a{color:inherit}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Full O'Flavour — Chips Reimagined</title>
+<meta name="description" content="Full O'Flavour — splashy, bold, crunchy chips. Animated one-page demo." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23ff4b2b'/><text x='50' y='58' font-size='48' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'>F</text></svg>">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,700&family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#ffecb3;
+    --bg2:#ffe6f0;
+    --accent1:#ff4b2b;
+    --accent2:#ffdc00;
+    --accent3:#5df2b0;
+    --deep:#141218;
+    --glass: rgba(255,255,255,0.08);
+    --glass-2: rgba(255,255,255,0.12);
+    --card: linear-gradient(135deg,var(--bg1),var(--bg2));
+    --max-width:1200px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Rubik, Montserrat, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: radial-gradient(1200px 600px at 10% 10%, #fff6e6 0%, transparent 10%),
+                radial-gradient(900px 500px at 90% 90%, #fff0f5 0%, transparent 10%),
+                linear-gradient(180deg,#fff 0%, #fff9f0 30%, #fff0f3 100%);
+    color:var(--deep);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-y:scroll;
+    scroll-behavior:smooth;
+    background-attachment:fixed;
+  }
 
-    /* Layout */
-    .wrap{max-width:1400px;margin:0 auto;padding:36px}
-    header{display:flex;align-items:center;gap:20px;justify-content:space-between}
-    .logo{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:1px}
-    .logo .mark{width:64px;height:64px;border-radius:12px;background:var(--neon2);display:grid;place-items:center;font-size:30px;color:#4a1300;box-shadow:0 10px 30px rgba(255,217,61,0.14),0 0 40px rgba(255,107,107,0.06);transform:rotate(-12deg)}
-    nav{display:flex;gap:14px;align-items:center}
-    nav a{padding:10px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);backdrop-filter: blur(6px);transition:all 280ms;}
-    nav a:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 14px 40px rgba(0,0,0,0.5),0 0 18px rgba(255,107,107,0.12);border-color:rgba(255,255,255,0.08)}
+/* Global layout */
+.wrap{max-width:var(--max-width);margin:0 auto;padding:24px;}
+header{
+position:fixed;inset:20px 24px auto 24px;z-index:60;
+display:flex;align-items:center;justify-content:space-between;gap:12px;
+pointer-events:auto;
+}
+.nav{
+display:flex;gap:12px;align-items:center;background:linear-gradient(90deg, rgba(255,255,255,0.85), rgba(255,255,255,0.6));
+padding:8px 14px;border-radius:18px;backdrop-filter: blur(6px);box-shadow:0 6px 30px rgba(22,22,22,0.08);
+transform-origin:center;animation:pop 900ms cubic-bezier(.16,.84,.24,1) both;
+}
+@keyframes pop{from{transform:translateY(-18px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700}
+.logo{
+width:56px;height:56px;border-radius:12px;display:grid;place-items:center;
+background: conic-gradient(from 120deg, var(--accent1), #ff7b50, #ffd24d, var(--accent3)); color:white;
+box-shadow: 0 6px 22px rgba(255,75,43,0.2), inset 0 -6px 18px rgba(0,0,0,0.08);
+transform: rotate(-12deg);
+}
+.logo b{font-family:Montserrat;font-size:20px;transform:translateY(-2px) rotate(-8deg)}
+.nav a{color:var(--deep);text-decoration:none;padding:6px 10px;border-radius:10px;font-weight:600}
+.nav a:hover{background:var(--glass);transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+.cta-buy{background:linear-gradient(90deg,var(--accent1),#ff6a2b);color:white;padding:10px 14px;border-radius:12px;font-weight:800;box-shadow:0 8px 30px rgba(255,75,43,0.18);cursor:pointer}
+.cta-buy:active{transform:translateY(1px)}
 
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 460px;gap:34px;align-items:center;margin-top:28px}
-    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:32px;border-radius:24px;box-shadow:var(--glow);position:relative;border:1px solid rgba(255,255,255,0.03);overflow:hidden}
-    h1{font-size:48px;margin:0 0 10px;line-height:1.01;background:var(--accent);-webkit-background-clip:text;background-clip:text;color:transparent}
-    p.lead{opacity:0.9;margin:0 0 18px}
-    .cta-row{display:flex;gap:12px}
-    .btn{padding:14px 18px;border-radius:14px;font-weight:700;border:none;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,0.45);transform:translateZ(0);}
-    .btn.primary{background:var(--neon1);color:#240202}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.08)}
+/* Hero */
+.hero{
+min-height:100vh;padding-top:120px;display:grid;grid-template-columns:1fr 420px;align-items:center;gap:28px;
+position:relative;overflow:visible;
+}
+.hero-left{
+padding:48px;border-radius:28px;background:linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3));
+box-shadow: 0 40px 80px rgba(22,22,22,0.06);
+backdrop-filter: blur(6px);
+transform:translateZ(0);
+animation:slideInLeft 1s cubic-bezier(.16,.84,.24,1);
+}
+@keyframes slideInLeft{from{transform:translateX(-30px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+h1{font-size: clamp(34px, 6vw, 64px);line-height:0.95;margin:0 0 12px 0;color:linear-gradient(90deg,var(--accent1),var(--accent2))}
+.eyebrow{display:inline-block;background:linear-gradient(90deg,#fff7ea,#fff1f6);padding:6px 10px;border-radius:12px;font-weight:700;margin-bottom:14px}
+p.lead{font-size:18px;opacity:0.86;margin:8px 0 20px 0}
+.hero-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn{padding:12px 16px;border-radius:12px;border:0;background:transparent;font-weight:800;cursor:pointer}
+.btn-ghost{border:2px dashed rgba(22,22,22,0.06);background:transparent}
+.feature-list{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.pill{background:linear-gradient(90deg,#fff,#fffef5);padding:10px 12px;border-radius:999px;font-weight:700;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+/* Right hero - big animated bag & chips */
+.hero-right{position:relative;display:grid;place-items:center;min-height:420px}
+.bag{
+width:360px;height:420px;border-radius:28px;background:
+radial-gradient(800px 300px at 10% 10%, rgba(255,255,255,0.24), transparent 8%),
+linear-gradient(160deg,#ff8b5a,#ff4b2b 45%, #ff6b2b 60%);
+display:grid;place-items:center;color:white;font-weight:900;padding:24px;transform:rotate(-6deg);
+box-shadow: 0 30px 80px rgba(255,75,43,0.18), inset 0 -10px 60px rgba(0,0,0,0.06);
+position:relative;overflow:visible;
+animation:float 6s ease-in-out infinite;
+}
+@keyframes float{0%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-18px) rotate(-4deg)}100%{transform:translateY(0) rotate(-6deg)}}
+.bag .label{font-size:28px;letter-spacing:1px;text-shadow:0 8px 34px rgba(0,0,0,0.15)}
+.chip-burst{position:absolute;inset: -30px -30px auto auto;width:260px;height:260px;pointer-events:none}
+/* floating chip shapes created by JS */
+.chip{
+width:64px;height:64px;border-radius:12px;background:linear-gradient(180deg,#fff,#ffe9d2);
+display:grid;place-items:center;font-weight:800;box-shadow:0 8px 22px rgba(22,22,22,0.12);
+transform-origin:center;will-change:transform,opacity;
+}
 
-    /* Animated chips */
-    .chip-wall{position:absolute;inset:0;pointer-events:none}
-    .chip{position:absolute;width:120px;height:120px;background:conic-gradient(from 120deg,var(--neon1),var(--neon2),var(--neon3));border-radius:50%;display:grid;place-items:center;font-size:22px;font-weight:900;color:#2b0202;filter:drop-shadow(0 12px 30px rgba(0,0,0,0.35));}
+/* Sections */
+section{padding:80px 0;border-top: 1px dashed rgba(0,0,0,0.03)}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.grid{display:grid;gap:18px}
+.grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.grid.cols-2{grid-template-columns:repeat(2,1fr)}
+.card{
+background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.65));
+padding:20px;border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,0.06);transition:transform .28s cubic-bezier(.16,.84,.24,1), box-shadow .28s;
+will-change:transform;
+}
+.card:hover{transform:translateY(-8px);box-shadow:0 30px 80px rgba(0,0,0,0.08)}
 
-    /* Right column: showcase */
-    .showcase{padding:20px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.012), transparent);height:100%;display:flex;flex-direction:column;gap:12px}
-    .preview{flex:1;border-radius:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .card-mini{border-radius:10px;padding:10px;background:rgba(255,255,255,0.02);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+/* Product tiles */
+.product{
+position:relative;overflow:visible;padding:18px;border-radius:14px;display:flex;gap:12px;align-items:center;
+}
+.product .art{width:120px;height:120px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(180deg,#fff8f0,#ffd8c0);box-shadow:0 12px 40px rgba(255,100,60,0.08)}
+.product .meta{flex:1}
+.price{font-weight:900;font-size:20px;color:var(--accent1)}
+.flavor{font-weight:800;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#fff,#fff9f2);display:inline-block;margin-top:8px}
 
-    /* Products */
-    .products{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .product{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));border-radius:18px;padding:18px;min-height:240px;position:relative;overflow:hidden}
-    .product h3{margin:0 0 8px}
-    .price{font-weight:900;color:#fff}
-    .flavour-tag{position:absolute;left:-40px;top:22px;transform:rotate(-12deg);background:var(--neon3);color:#011;padding:8px 22px;border-radius:8px;font-weight:800}
+/* 3D tilt effect */
+.tilt{transform-style:preserve-3d;transition:transform .12s ease-out}
+.tilt .pop{transform:translateZ(18px)}
+.hover-pop{transition:transform .22s}
 
-    /* Fancy features list */
-    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}
-    .feature{background:var(--glass);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+/* Carousel */
+.carousel{display:flex;gap:12px;align-items:center}
+.carousel-track{display:flex;gap:14px;overflow:hidden;padding:12px;border-radius:12px}
+.carousel-item{min-width:220px;flex:0 0 auto;border-radius:12px;padding:18px;background:linear-gradient(180deg,#ffffff,#fff6f3);box-shadow:0 18px 40px rgba(0,0,0,0.04)}
 
-    /* Footer & Contact */
-    footer{margin-top:36px;padding:24px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));display:flex;gap:20px}
-    .socials{display:flex;gap:12px}
-    .social{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,0.02);}
+/* Builder / Cart */
+.builder{display:grid;grid-template-columns:1fr 340px;gap:18px}
+.cart-drawer{position:fixed;right:22px;bottom:22px;width:360px;background:linear-gradient(180deg,#fff,#fffaf0);padding:18px;border-radius:16px;box-shadow:0 40px 120px rgba(0,0,0,0.12);z-index:80}
+.cart-toggle{position:fixed;right:24px;bottom:24px;background:linear-gradient(90deg,var(--accent3),#3be88f);color:white;padding:14px;border-radius:14px;font-weight:900;z-index:90;box-shadow:0 10px 30px rgba(0,0,0,0.12)}
+.cart-items{max-height:260px;overflow:auto;margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.cart-empty{opacity:0.6;font-style:italic;padding:12px}
 
-    /* Contact form */
-    .contact-wrap{display:flex;gap:20px;align-items:flex-start}
-    form{flex:1;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px}
-    input,textarea,select{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit;margin-bottom:12px}
-    .submit{display:inline-flex;align-items:center;gap:10px}
+/* Contact form */
+form.contact{display:grid;gap:12px}
+input,textarea,select{padding:12px;border-radius:12px;border:2px solid rgba(0,0,0,0.04);outline:none;font-weight:700;background:transparent}
+input:focus,textarea:focus{box-shadow:0 10px 30px rgba(255,75,43,0.08);border-color:rgba(255,75,43,0.12)}
+.form-row{display:flex;gap:12px}
+.socials{display:flex;gap:12px;align-items:center}
+.socials a{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,#fff,#fffef3);box-shadow:0 8px 30px rgba(0,0,0,0.05)}
 
-    /* micro-animations */
-    .float{animation:float 6s ease-in-out infinite}
-    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-16px)}100%{transform:translateY(0)}}
-    .swing{animation:swing 3.6s cubic-bezier(.25,.9,.28,1) infinite}
-    @keyframes swing{0%{transform:rotate(-4deg)}50%{transform:rotate(6deg)}100%{transform:rotate(-4deg)}}
+/* Footer */
+footer{padding:48px 0;background:linear-gradient(180deg,#fff7f2,#fff2f6);border-top:1px solid rgba(0,0,0,0.02);margin-top:40px}
+.footer-grid{display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between}
 
-    /* Everything pop */
-    *[data-animated]{animation:pop .9s cubic-bezier(.22,.9,.26,1) both}
-    @keyframes pop{0%{opacity:0;transform:scale(.86) translateY(6px)}100%{opacity:1;transform:none}}
+/* Animations & tiny details */
+.sparkle{position:absolute;inset:auto 0 0 0;height:12px;pointer-events:none}
+.marquee{overflow:hidden;white-space:nowrap;padding:6px 0}
+.marquee .m{display:inline-block;padding-right:50px;font-weight:900;font-size:14px;opacity:.9}
+.badge{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,#fffee7,#fff5f8);font-weight:900}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-    /* responsive */
-    @media (max-width:1000px){.hero{grid-template-columns:1fr;}.products{grid-template-columns:repeat(2,1fr)}.wrap{padding:18px}}
-    @media (max-width:700px){.products{grid-template-columns:1fr}} 
+/* Responsive */
+@media (max-width:980px){
+.hero{grid-template-columns:1fr; padding-top:140px}
+header{left:12px;right:12px}
+.builder{grid-template-columns:1fr}
+.bag{width:300px;height:340px}
+}
+@media (max-width:560px){
+.nav{gap:6px;padding:6px 10px}
+.brand .logo{width:48px;height:48px}
+header{inset:12px 12px auto 12px}
+.hero-left{padding:28px;border-radius:20px}
+.bag{width:240px;height:300px}
+.card{padding:14px}
+}
 
-    /* fun cursor */
-    body{cursor:none}
-    .cursor{position:fixed;pointer-events:none;width:36px;height:36px;border-radius:50%;transform:translate(-50%,-50%);display:grid;place-items:center;font-weight:900;font-size:14px;z-index:9999}
+/* small helpers */
+.muted{opacity:.7}
+.big{font-weight:900;font-size:20px}
+.glow{filter:drop-shadow(0 20px 40px rgba(255,90,46,0.15))} </style>
 
-    /* marquee */
-    .ticker{margin-top:18px;padding:6px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));overflow:hidden}
-    .ticker .track{display:inline-block;white-space:nowrap;padding-right:100%}
-    .ticker span{display:inline-block;margin-right:56px;font-weight:800}
-    .track{animation:marquee 22s linear infinite}
-    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-    /* easter egg */
-    .easter{position:fixed;right:18px;bottom:18px;background:var(--neon1);padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:800}
-  </style>
 </head>
 <body>
-  <div class="wrap">
-    <header data-animated>
-      <div class="logo">
-        <div class="mark swing">🍟</div>
-        <div>
-          <div style="font-size:20px">Full O'Flavour</div>
-          <div style="font-size:12px;opacity:.7">Chips & Crunch Emporium</div>
-        </div>
+<!-- Header / nav -->
+<header>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="brand" role="img" aria-hidden="false">
+      <div class="logo" title="Full O'Flavour">
+        <b>F</b>
       </div>
-      <nav>
-        <a href="#products">Products</a>
-        <a href="#features">Features</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
-        <a id="demo-btn" class="btn ghost">Taste the vibes</a>
-      </nav>
-    </header>
+      <div>
+        <div style="font-size:14px">Full O'Flavour</div>
+        <div style="font-size:11px;opacity:.8;margin-top:2px">Make every bite loud</div>
+      </div>
+    </div>
 
-    <main>
-      <section class="hero">
-        <div class="hero-card" id="hero-card">
-          <div class="chip-wall" aria-hidden>
-            <!-- JS will place animated chips here -->
-          </div>
-          <h1 data-animated>Big Taste. Bigger Personality.</h1>
-          <p class="lead" data-animated>Full O'Flavour makes ridiculously tasty, outrageously crunchy chips for people who don't do subtle. Natural ingredients, amplified seasoning, zero compromise.</p>
-          <div class="cta-row" data-animated>
-            <button class="btn primary" id="buy-now">Shop the Crunch</button>
-            <button class="btn ghost" id="learn-more">See Flavours</button>
-          </div>
-          <div class="ticker" aria-hidden>
-            <div class="track">
-              <span>NEW: GlowSalt — electric lemon zing ⚡</span>
-              <span>LIMITED: Midnight BBQ — smoky as midnight 🔥</span>
-              <span>VEGAN: Herbsplosion — herb bomb 🌿</span>
-              <span>SPICY: Lava Crunch — not for the faint 🌶️</span>
-            </div>
-          </div>
-        </div>
+```
+<div style="display:flex;gap:10px;align-items:center">
+  <a href="#products">Flavours</a>
+  <a href="#builder">Build</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+  <button class="cta-buy" id="quickOrderBtn" aria-label="Order now">ORDER NOW</button>
+</div>
+```
 
-        <aside class="showcase" data-animated>
-          <div class="preview">
-            <div class="card-mini float">
-              <div style="font-size:26px;font-weight:900">Featured</div>
-              <div style="opacity:.85">GlowSalt</div>
-            </div>
-            <div class="card-mini swing">
-              <div style="font-size:26px;font-weight:900">Limited</div>
-              <div style="opacity:.85">Midnight BBQ</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:10px;align-items:center;justify-content:space-between">
-            <div style="font-weight:900">Crunch meter</div>
-            <div id="crunch-meter" style="font-weight:800">🔥🔥🔥🔥</div>
-          </div>
-        </aside>
-      </section>
+  </nav>
+</header>
 
-      <section id="products" class="products" data-animated>
-        <article class="product" tabindex="0">
-          <div class="flavour-tag">GlowSalt</div>
-          <h3>GlowSalt — Electric Lemon</h3>
-          <p>Bright citrus salt fused with sea crystals. Pops on the tongue.</p>
-          <div style="display:flex;gap:8px;align-items:center;margin-top:12px">
-            <div class="price">$3.49</div>
-            <button class="btn primary" onclick="addToCart('GlowSalt')">Add</button>
-          </div>
-        </article>
+<!-- Hero -->
 
-        <article class="product" tabindex="0">
-          <div class="flavour-tag">Midnight BBQ</div>
-          <h3>Midnight BBQ — Smoked & Sweet</h3>
-          <p>Deep smoke, molasses hit, long finish. Midnight approved.</p>
-          <div style="display:flex;gap:8px;align-items:center;margin-top:12px">
-            <div class="price">$4.29</div>
-            <button class="btn primary" onclick="addToCart('Midnight BBQ')">Add</button>
-          </div>
-        </article>
+<main>
+  <section class="hero wrap" id="home">
+    <div class="hero-left">
+      <div class="eyebrow">NEW — Limited run: Fizzy Vinegar</div>
+      <h1>Full O'Flavour<br><span style="color:var(--accent1)">Chips that scream</span> louder</h1>
+      <p class="lead">Bright. Loud. Ridiculously crunchy. Full O'Flavour crafts bold chile, tang, and sweet-smoky chips built for devouring — with a side of personality. Our website is loud, so the chips don't have to whisper.</p>
 
-        <article class="product" tabindex="0">
-          <div class="flavour-tag">Lava Crunch</div>
-          <h3>Lava Crunch — Devil's Heat</h3>
-          <p>Capsaicin-forward. Warning: tears may occur.</p>
-          <div style="display:flex;gap:8px;align-items:center;margin-top:12px">
-            <div class="price">$3.99</div>
-            <button class="btn primary" onclick="addToCart('Lava Crunch')">Add</button>
-          </div>
-        </article>
-      </section>
-
-      <section id="features" class="features">
-        <div class="feature" data-animated>
-          <h4>Subscription Box</h4>
-          <p>Get curated flavours monthly: surprise seasonals, hot exclusives.</p>
-        </div>
-        <div class="feature" data-animated>
-          <h4>Build-a-Bag</h4>
-          <p>Mix your own pack. Pick 3 flavours, name it, and we print a sticker.</p>
-        </div>
-        <div class="feature" data-animated>
-          <h4>Party Packs</h4>
-          <p>Gigantic bulk bags for DJs, parties, and karaoke champions.</p>
-        </div>
-        <div class="feature" data-animated>
-          <h4>AR Try-On</h4>
-          <p>Use your camera (coming soon!) to see the chips look on your table in AR.</p>
-        </div>
-      </section>
-
-      <section id="about" style="margin-top:28px;display:flex;gap:20px;align-items:flex-start">
-        <div style="flex:1" data-animated>
-          <h2>About Full O'Flavour</h2>
-          <p>Founded by snack rebels. We love flavour — and making mouths happy. No artificial cowardice.</p>
-          <div style="display:flex;gap:12px;margin-top:12px">
-            <button class="btn ghost" onclick="openShop()">Shop now</button>
-            <button class="btn" onclick="surprise()">Surprise me</button>
-          </div>
-        </div>
-        <div style="width:420px" data-animated>
-          <div class="contact-wrap">
-            <form id="contact-form">
-              <input name="name" placeholder="Your name" required />
-              <input name="email" type="email" placeholder="you@internet.com" required />
-              <select name="topic">
-                <option>General</option>
-                <option>Wholesale</option>
-                <option>Collab / Influencer</option>
-                <option>Press</option>
-              </select>
-              <textarea name="message" placeholder="Tell us what's up" rows="4" required></textarea>
-              <div style="display:flex;gap:8px;align-items:center">
-                <button class="btn primary submit" type="submit">Send message</button>
-                <div id="contact-status" style="opacity:.9;font-weight:700"></div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" style="margin-top:28px">
-        <footer>
-          <div style="flex:1">
-            <div style="font-weight:900">Where to find us</div>
-            <p style="margin:8px 0 0">Online & in stores. Pop-up events, markets, and aggressive flavour sampling.</p>
-            <div style="margin-top:12px;display:flex;gap:10px;align-items:center" class="socials">
-              <a class="social" href="https://twitter.com/" target="_blank" aria-label="Twitter">🐦</a>
-              <a class="social" href="https://instagram.com/" target="_blank" aria-label="Instagram">📸</a>
-              <a class="social" href="https://facebook.com/" target="_blank" aria-label="Facebook">📘</a>
-              <a class="social" href="https://tiktok.com/" target="_blank" aria-label="TikTok">🎵</a>
-            </div>
-          </div>
-
-          <div style="width:360px">
-            <div style="font-weight:900">Newsletter</div>
-            <p style="margin:6px 0">Be loud. Get discounts & secret flavours.</p>
-            <form id="newsletter">
-              <input placeholder="email@you.com" name="email" type="email" required />
-              <div style="display:flex;gap:8px;margin-top:8px"><button class="btn primary">Subscribe</button><button class="btn ghost" type="button" onclick="toggleTheme()">Theme</button></div>
-            </form>
-          </div>
-        </footer>
-      </section>
-    </main>
+```
+  <div class="hero-actions">
+    <button class="btn cta-buy" id="heroShop">Shop Flavours</button>
+    <button class="btn btn-ghost" id="heroBuild">Design Your Bag</button>
+    <div style="margin-left:8px" class="badge">Crunch Index: <strong style="margin-left:8px">11/10</strong></div>
   </div>
 
-  <div class="cursor" id="cursor">🍟</div>
-  <button class="easter" id="easter">EAT</button>
+  <div class="feature-list" aria-hidden="true" style="margin-top:22px">
+    <div class="pill">Ultra Crunch</div>
+    <div class="pill">Locally Sourced Taters</div>
+    <div class="pill">No Artificial Drama</div>
+    <div class="pill">Limited Flavors</div>
+  </div>
 
-  <script>
-    /* Utility & animations */
-    const rand = (a,b)=>Math.random()*(b-a)+a
-    // Create floating chips
-    const chipWall = document.querySelector('.chip-wall')
-    const flavours=['GlowSalt','Midnight BBQ','Lava Crunch','Herbsplosion','Tangy Tango','Salt & Whisper']
-    for(let i=0;i<10;i++){
-      const c=document.createElement('div');c.className='chip float';
-      c.style.left=rand(2,90)+'%';c.style.top=rand(2,90)+'%';c.style.width=rand(64,140)+'px';c.style.height=c.style.width;
-      c.style.animationDuration=rand(4,9)+'s';c.style.opacity=0.95*rand(0.6,1)
-      c.textContent=flavours[Math.floor(rand(0,flavours.length))]
-      chipWall.appendChild(c)
-    }
+  <div class="marquee" style="margin-top:18px">
+    <div id="marq" style="display:flex;align-items:center;gap:14px">
+      <div class="m">🔥 HOT: Mango Chile — Spicy</div>
+      <div class="m">✨ NEW: Fizzy Vinegar — Tang Boom</div>
+      <div class="m">🎉 SALE: Buy 2 Get 1 (cart simulation)</div>
+    </div>
+  </div>
+  <div style="margin-top:16px;display:flex;gap:10px;align-items:center">
+    <button class="btn" id="demoConfetti">Celebrate! 🎉</button>
+    <div style="font-size:12px;color:#666;margin-left:6px" class="muted">Click for confetti & chip rain.</div>
+  </div>
+</div>
 
-    // Cursor
-    const cursor=document.getElementById('cursor')
-    window.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'})
+<div class="hero-right">
+  <div class="bag glow" role="img" aria-label="Bag of Full O'Flavour chips">
+    <div class="label">Full O'Flavour</div>
+    <div style="font-size:12px;opacity:.9;margin-top:6px">Super Crunch — 180g</div>
 
-    // Add-to-cart playful
-    window.addToCart=(name)=>{
-      const el=document.createElement('div');el.style.position='fixed';el.style.left=window.innerWidth/2+'px';el.style.top=window.innerHeight/2+'px';el.style.padding='18px 26px';el.style.borderRadius='14px';el.style.background='linear-gradient(90deg,#ff6b6b,#ffd93d)';el.style.transform='translate(-50%,-50%) scale(0.4)';el.style.color='#240202';el.style.fontWeight=900;el.innerText=`Added ${name}!`;
-      document.body.appendChild(el);
-      requestAnimationFrame(()=>{el.style.transition='transform .7s cubic-bezier(.22,.9,.28,1),opacity .7s';el.style.transform='translate(-50%,-120%) scale(1)';el.style.opacity=1});
-      setTimeout(()=>{el.style.opacity=0;el.style.transform='translate(-50%,-200%) scale(.9)';setTimeout(()=>el.remove(),900)},1600)
-    }
+    <svg class="chip-burst" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <linearGradient id="g1" x1="0" x2="1">
+          <stop offset="0" stop-color="#fff7f2"/>
+          <stop offset="1" stop-color="#ffd8c0"/>
+        </linearGradient>
+      </defs>
+      <!-- Decorative sun -->
+      <circle cx="36" cy="40" r="8" fill="#fff4db" opacity="0.6"/>
+      <circle cx="160" cy="30" r="6" fill="#fff8e6" opacity="0.5"/>
+    </svg>
+  </div>
 
-    // Contact form (local demo)
-    const contact = document.getElementById('contact-form')
-    contact.addEventListener('submit',e=>{
-      e.preventDefault();
-      const data = new FormData(contact);const name=data.get('name');const email=data.get('email');const msg=data.get('message');
-      // fake send + visual feedback
-      const status = document.getElementById('contact-status');status.innerText='Sending...';
-      setTimeout(()=>{status.innerText='Message sent — we will crunch on it!';contact.reset();setTimeout(()=>status.innerText='',4200)},900)
-    })
+  <!-- Floating chip container (JS will populate) -->
+  <div id="floatingChips" style="position:absolute;right:70px;top:40px;pointer-events:none"></div>
+</div>
+```
 
-    // Newsletter
-    document.getElementById('newsletter').addEventListener('submit',e=>{e.preventDefault();alert('Subscribed — behold tiny discounts!')})
+  </section>
 
-    // Demo buttons
-    function openShop(){location.hash='#products';document.getElementById('buy-now').scrollIntoView({behavior:'smooth'})}
-    function surprise(){const names=['GlowSalt','Midnight BBQ','Lava Crunch','Herbsplosion'];alert('Surprise pick: '+names[Math.floor(Math.random()*names.length)])}
-    document.getElementById('demo-btn').addEventListener('click',()=>{surprise()})
+  <!-- Products -->
 
-    // animated entrance
-    document.querySelectorAll('[data-animated]').forEach((el,i)=>{el.style.animationDelay=(i*80)+'ms'})
+  <section id="products">
+    <div class="wrap container">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+        <div>
+          <h2 style="margin:0">Featured Flavours</h2>
+          <div class="muted">Pick your flavor. Taste the attitude.</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <button class="btn" id="prevCar">◀</button>
+          <button class="btn" id="nextCar">▶</button>
+        </div>
+      </div>
 
-    // Crunch meter playful
-    const crunchMeter=document.getElementById('crunch-meter');setInterval(()=>{crunchMeter.innerText='🔥'.repeat(1+Math.floor(Math.random()*5))},1200)
+```
+  <div style="margin-top:18px" class="carousel">
+    <div class="carousel-track card glide" id="carouselTrack" aria-live="polite">
+      <!-- items injected by JS -->
+    </div>
+  </div>
 
-    // Toast confetti on load
-    window.addEventListener('load',()=>{confettiBurst(32)})
-    function confettiBurst(n){for(let i=0;i<n;i++){const p=document.createElement('div');p.style.position='fixed';p.style.left=(50+Math.random()*600-300)+'px';p.style.top=(40+Math.random()*200)+'px';p.style.width='12px';p.style.height='8px';p.style.opacity=0.95;p.style.borderRadius='4px';p.style.transform='translateY(0) rotate('+Math.random()*360+'deg)';p.style.background=['#ff6b6b','#ffd93d','#6bffb8'][Math.floor(Math.random()*3)];p.style.zIndex=9999;document.body.appendChild(p);const dx=(Math.random()-0.5)*120;const dy=400+Math.random()*600;p.animate([{transform:'translateY(0) rotate(0deg)',opacity:1},{transform:`translate(${dx}px,${dy}px) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:1200+Math.random()*800,easing:'cubic-bezier(.2,.7,.2,1)'});setTimeout(()=>p.remove(),2200)}}
+  <div style="margin-top:28px" class="grid cols-3" id="productGrid" aria-label="All products">
+    <!-- product cards injected by JS -->
+  </div>
+</div>
+```
 
-    // Keyboard easter egg
-    document.getElementById('easter').addEventListener('click',()=>{surprise();confettiBurst(64)})
-    document.addEventListener('keydown',e=>{if(e.key==='f'){confettiBurst(40)}})
+  </section>
 
-    // Theme toggler (switch gradients & background)
-    function toggleTheme(){document.documentElement.style.setProperty('--bg', document.documentElement.style.getPropertyValue('--bg')==='#0f0c1a' ? '#061018' : '#0f0c1a')}
-    window.toggleTheme=toggleTheme
+  <!-- Builder & cart -->
 
-    // Accessibility: focus outlines
-    document.body.addEventListener('keydown',e=>{if(e.key==='Tab')document.body.classList.add('show-focus')})
+  <section id="builder">
+    <div class="wrap container">
+      <h2>Build Your Bag</h2>
+      <p class="muted">Choose a base, flavour intensity, and add-in toppings. This is purely client-side: cart saves locally.</p>
 
-    // Lazy micro-animations when scrolled into view
-    const obs = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('pop');e.target.style.opacity=1;}})},{threshold:0.12})
-    document.querySelectorAll('.product, .feature').forEach(n=>{n.style.opacity=0;obs.observe(n)})
+```
+  <div class="builder" style="margin-top:18px">
+    <div class="card">
+      <div style="display:flex;gap:18px;align-items:center">
+        <div style="width:140px;height:140px;border-radius:14px;background:linear-gradient(180deg,#fff8f5,#ffd9bf);display:grid;place-items:center" id="builderPreview">
+          <div style="font-weight:900;font-size:20px">Preview</div>
+        </div>
+        <div>
+          <div style="font-weight:900;font-size:20px">Custom Bag</div>
+          <div class="muted">Make it loud. Make it weird. It's your bag.</div>
+          <div style="margin-top:12px">
+            <div><strong>Price:</strong> <span id="builderPrice" class="price">€3.49</span></div>
+            <div class="muted" style="font-size:12px">Cart persists locally in your browser.</div>
+          </div>
+        </div>
+      </div>
 
-    // Make everything 'animated' by toggling attribute on load for dramatic delay
-    setTimeout(()=>{document.querySelectorAll('[data-animated]').forEach(el=>el.setAttribute('data-animated','on'))},120)
+      <hr style="margin:16px 0;border:none;border-top:1px dashed rgba(0,0,0,0.06)">
 
-    // GitHub Pages ready: add simple offline CTA
-    const btn=document.createElement('button');btn.textContent='Download menu (PNG)';btn.className='btn ghost';btn.style.position='fixed';btn.style.left='18px';btn.style.bottom='18px';btn.onclick=()=>downloadMenu();document.body.appendChild(btn)
-    function downloadMenu(){const svg=`<svg xmlns='http://www.w3.org/2000/svg' width='800' height='1000'><rect width='100%' height='100%' fill='#06060b'/><text x='50' y='80' fill='white' font-size='40' font-family='Arial'>Full O\'Flavour Menu</text></svg>`;const blob=new Blob([svg],{type:'image/svg+xml'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='FullOFlavour-menu.svg';a.click();URL.revokeObjectURL(url)}
+      <form id="builderForm" aria-label="Chip builder form">
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <select id="flavourSelect" aria-label="Choose flavour">
+            <option value="mango">Mango Chile — Sweet & Hot</option>
+            <option value="bbq">Smoked BBQ — Deep & Smoky</option>
+            <option value="salt">Classic Sea Salt — Crisp</option>
+            <option value="vinegar">Fizzy Vinegar — Tangy Pop</option>
+            <option value="cheese">Nuclear Cheese — Loud Dairy</option>
+          </select>
+          <select id="crunchSelect" aria-label="Crunch level">
+            <option value="7">Crunch: 7 — Firm</option>
+            <option value="9">Crunch: 9 — Extra</option>
+            <option value="11">Crunch: 11 — Super</option>
+          </select>
+          <select id="toppingSelect" aria-label="Topping">
+            <option value="none">No add-ins</option>
+            <option value="lime">Zesty Lime Dust</option>
+            <option value="peppercorn">Cracked Peppercorn</option>
+            <option value="honey">Honey Drizzle</option>
+          </select>
+        </div>
 
-    // small AR-like table preview (CSS only)
-    // No external libs: everything self-contained to be Github Pages friendly.
-  </script>
+        <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+          <button class="cta-buy" type="button" id="addToCartBtn">Add to Cart</button>
+          <button class="btn btn-ghost" type="button" id="randomizeBtn">Surprise Me</button>
+          <div class="muted" style="margin-left:auto">Cart items saved locally</div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Cart drawer -->
+    <aside class="card cart-drawer" aria-label="Cart" id="cartDrawer">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="font-weight:900">Your Cart</div>
+        <div id="cartCount" class="muted">0 items</div>
+      </div>
+      <div class="cart-items" id="cartItems" aria-live="polite" style="margin-top:10px">
+        <div class="cart-empty">Your cart is empty. Add a custom bag or a featured flavour!</div>
+      </div>
+
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+        <button id="checkoutBtn" class="cta-buy" style="flex:1">Checkout (simulate)</button>
+        <button id="clearCartBtn" class="btn btn-ghost">Clear</button>
+      </div>
+
+      <div style="margin-top:12px;font-size:12px" class="muted">
+        This demo doesn't process payments. Clicking Checkout will simulate an order and clear the cart.
+      </div>
+    </aside>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- About & testimonials -->
+
+  <section id="about">
+    <div class="wrap container">
+      <h2>About Full O'Flavour</h2>
+      <p class="muted">We started in a garage with a loud potato and a dream. Our mission: make chips with personality as big as their crunch.</p>
+
+```
+  <div style="margin-top:18px" class="grid cols-2">
+    <div class="card">
+      <h3>Our Process</h3>
+      <p class="muted">Small batch slicing, hand-seasoned balances, and a daring flavor lab. Every bag tells a story — and occasionally a joke.</p>
+      <ul class="muted">
+        <li>Crisp-fried to perfection</li>
+        <li>Seasoned with real ingredients</li>
+        <li>Designed for sharing (or not)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Testimonials</h3>
+      <div id="testimonials" style="display:flex;gap:10px;overflow:hidden">
+        <!-- testimonial cards -->
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- Contact -->
+
+  <section id="contact">
+    <div class="wrap container">
+      <h2>Contact Us</h2>
+      <p class="muted">Questions, collabs, scream into the void — we'll read it.</p>
+
+```
+  <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px">
+    <div class="card">
+      <form class="contact" id="contactForm" aria-label="Contact form">
+        <div class="form-row">
+          <input id="name" placeholder="Your name" required />
+          <input id="email" placeholder="you@email.com" type="email" required />
+        </div>
+        <input id="subject" placeholder="Subject" />
+        <textarea id="message" placeholder="Tell us what's up..." rows="6" required></textarea>
+
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="cta-buy" type="submit">Send Message</button>
+          <button class="btn btn-ghost" type="button" id="saveDraft">Save draft</button>
+          <div id="contactStatus" class="muted" style="margin-left:auto">Local only — no backend.</div>
+        </div>
+      </form>
+    </div>
+
+    <aside class="card">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div><strong>Our HQ</strong><div class="muted">Imaginary Lane 42, Crunch City</div></div>
+        <div><strong>Email</strong><div class="muted">hello@fullofavour.example</div></div>
+        <div><strong>Phone</strong><div class="muted">(+44) 20 7946 0000 (demo)</div></div>
+
+        <div style="margin-top:8px"><strong>Follow us</strong></div>
+        <div class="socials">
+          <a href="#" title="Instagram" id="instaLink" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5z" stroke="#ff4b2b" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8.2a3.8 3.8 0 100 7.6 3.8 3.8 0 000-7.6z" stroke="#ff4b2b" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.8 6.2v.01" stroke="#ff4b2b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#" title="Twitter" aria-label="Twitter">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M23 4.999a10.9 10.9 0 01-3.14.86A4.48 4.48 0 0012 9.3v.56A10.66 10.66 0 013 5.49s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 4.999z" stroke="#ff6a2b" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#" title="TikTok" aria-label="TikTok">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 17a4 4 0 104 4V9h3" stroke="#5df2b0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div style="margin-top:8px">
+          <strong>Newsletter</strong>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <input id="newsletterEmail" placeholder="you@email.com" />
+            <button class="btn" id="subscribeBtn">Join</button>
+          </div>
+          <div id="newsletterMsg" class="muted" style="font-size:12px;margin-top:6px"></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- Footer -->
+
+  <footer>
+    <div class="wrap container footer-grid">
+      <div>
+        <div style="font-weight:900">Full O'Flavour</div>
+        <div class="muted" style="font-size:13px;margin-top:6px">All the crunch, none of the apologies.</div>
+      </div>
+      <div class="muted" style="font-size:14px">© <span id="year"></span> Full O'Flavour — Demo site</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <a href="#home" class="muted">Home</a>
+        <a href="#products" class="muted">Products</a>
+        <a href="#contact" class="muted">Contact</a>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<!-- Hidden template nodes -->
+
+<template id="productTpl">
+  <div class="card product tilt" role="article">
+    <div class="art glowy" aria-hidden="true"></div>
+    <div class="meta">
+      <div class="big title"></div>
+      <div class="muted description"></div>
+      <div style="margin-top:10px;display:flex;gap:10px;align-items:center">
+        <div class="price"></div>
+        <button class="btn addSmall">Add</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="carouselTpl">
+  <div class="carousel-item card tilt">
+    <div style="font-weight:900" class="ctitle"></div>
+    <div class="muted cdesc" style="margin-top:6px"></div>
+    <div style="margin-top:10px;display:flex;gap:8px;align-items:center"><button class="btn addSmall">Add</button><div class="price"></div></div>
+  </div>
+</template>
+
+<script>
+/* ============================
+   Utilities & Initialization
+   ============================ */
+const qs = (s, c=document) => c.querySelector(s);
+const qsa = (s,c=document) => Array.from(c.querySelectorAll(s));
+const rand = (min,max)=>Math.floor(Math.random()*(max-min+1))+min;
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ============================
+   Floating chip generation
+   ============================ */
+const floatingContainer = qs('#floatingChips');
+const chipColors = ['#fff1e6','#fff3d9','#fff4f8','#fff7e6','#fffde6','#ffe9f2'];
+function spawnChips(num=10){
+  floatingContainer.innerHTML = '';
+  for(let i=0;i<num;i++){
+    const el = document.createElement('div');
+    el.className='chip';
+    const size = rand(36,72);
+    el.style.width = el.style.height = size+'px';
+    el.style.left = rand(-40,260)+'px';
+    el.style.top = rand(-60,260)+'px';
+    el.style.position = 'absolute';
+    el.style.background = `linear-gradient(180deg, ${chipColors[rand(0,chipColors.length-1)]}, #ffd9bf)`;
+    el.textContent = ['CR','FW','ZP','🔥','+','♨'][rand(0,5)];
+    el.style.fontSize = Math.max(10, size/4) + 'px';
+    el.style.transform = `rotate(${rand(-40,40)}deg)`;
+    el.style.opacity = 0;
+    floatingContainer.appendChild(el);
+    animateChip(el, i);
+  }
+}
+function animateChip(el, i){
+  const delay = i*120;
+  setTimeout(()=> {
+    el.animate([
+      {transform: el.style.transform + ' translateY(0) scale(.4)', opacity:0},
+      {transform: el.style.transform + ' translateY(-40px) scale(1.05)', opacity:1},
+      {transform: el.style.transform + ' translateY(-12px) scale(.95)', opacity:0.95}
+    ], {duration: 2200+rand(0,1200), iterations: Infinity, direction:'alternate', easing:'cubic-bezier(.2,.8,.2,1)'});
+  }, delay);
+}
+spawnChips(8);
+
+/* Marquee */
+(function initMarquee(){
+  const marq = qs('#marq');
+  let offset = 0;
+  function step(){
+    offset-=1;
+    if(Math.abs(offset) > marq.scrollWidth/2) offset = 0;
+    marq.style.transform = `translateX(${offset}px)`;
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+})();
+
+/* ============================
+   Carousel & product data
+   ============================ */
+const flavours = [
+  {id:'mango',name:'Mango Chile',desc:'Sweet heat with tang',price:3.49, color1:'#fff0e6', color2:'#ffdaa9'},
+  {id:'bbq',name:'Smoked BBQ',desc:'Deep smoky caramelized warmth',price:3.99, color1:'#fff6e6', color2:'#ffd6c2'},
+  {id:'salt',name:'Sea Salt',desc:'Clean salty crisp',price:2.99, color1:'#fffdf8', color2:'#f4f7ff'},
+  {id:'vinegar',name:'Fizzy Vinegar',desc:'Effervescent tang explosion',price:3.79, color1:'#fff7fb', color2:'#ffe6f2'},
+  {id:'cheese',name:'Nuclear Cheese',desc:'Bold cheesy chaos',price:4.29, color1:'#fff9e6', color2:'#fff2c2'}
+];
+
+const carouselTrack = qs('#carouselTrack');
+const prodGrid = qs('#productGrid');
+const carTpl = qs('#carouselTpl');
+const prodTpl = qs('#productTpl');
+
+function renderCarousel(){
+  carouselTrack.innerHTML='';
+  flavours.forEach(f=>{
+    const node = carTpl.content.cloneNode(true);
+    node.querySelector('.ctitle').textContent = f.name;
+    node.querySelector('.cdesc').textContent = f.desc;
+    node.querySelector('.price').textContent = `€${f.price.toFixed(2)}`;
+    const item = node.querySelector('.carousel-item');
+    item.style.background = `linear-gradient(180deg, ${f.color1}, ${f.color2})`;
+    item.querySelector('.addSmall').addEventListener('click', ()=> addToCart({name:f.name,price:f.price}));
+    carouselTrack.appendChild(item);
+  });
+}
+renderCarousel();
+
+function renderGrid(){
+  prodGrid.innerHTML='';
+  flavours.forEach(f=>{
+    const node = prodTpl.content.cloneNode(true);
+    const card = node.querySelector('.card');
+    card.classList.add('product');
+    card.querySelector('.title').textContent = f.name;
+    card.querySelector('.description').textContent = f.desc;
+    card.querySelector('.price').textContent = `€${f.price.toFixed(2)}`;
+    const art = node.querySelector('.art');
+    art.style.background = `linear-gradient(180deg, ${f.color1}, ${f.color2})`;
+    art.innerHTML = chipSVG(f.name);
+    node.querySelector('.addSmall').addEventListener('click', ()=> addToCart({name:f.name,price:f.price}));
+    prodGrid.appendChild(node);
+  });
+}
+renderGrid();
+
+function chipSVG(label){
+  return `<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="6" y="6" width="84" height="84" rx="12" fill="url(#g)"/>
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#ffe2c6"/></linearGradient></defs>
+    <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-weight="900" font-size="14" fill="#ff4b2b">${label.split(' ')[0]}</text>
+  </svg>`;
+}
+
+/* Carousel controls */
+let carouselIndex = 0;
+qs('#nextCar').addEventListener('click', ()=> slideCarousel(1));
+qs('#prevCar').addEventListener('click', ()=> slideCarousel(-1));
+function slideCarousel(dir){
+  const children = Array.from(carouselTrack.children);
+  if(!children.length) return;
+  carouselIndex = (carouselIndex + dir + children.length) % children.length;
+  const target = children[carouselIndex];
+  target.scrollIntoView({behavior:'smooth',inline:'center'});
+}
+setInterval(()=> slideCarousel(1),6000);
+
+/* ============================
+   Cart & builder logic (localStorage)
+   ============================ */
+const cartKey = 'fof_cart_v1';
+function loadCart(){ try{ return JSON.parse(localStorage.getItem(cartKey)||'[]') }catch(e){return []}}
+function saveCart(c){ localStorage.setItem(cartKey, JSON.stringify(c)); renderCart() }
+let cart = loadCart();
+
+function renderCart(){
+  const items = qs('#cartItems');
+  items.innerHTML = '';
+  if(!cart.length){
+    items.innerHTML = '<div class="cart-empty">Your cart is empty. Add a custom bag or a featured flavour!</div>';
+  } else {
+    cart.forEach((it, idx)=>{
+      const el = document.createElement('div');
+      el.style.display='flex';
+      el.style.justifyContent='space-between';
+      el.style.alignItems='center';
+      el.style.padding='8px';
+      el.style.borderRadius='8px';
+      el.style.background='linear-gradient(180deg,#fff,#fffef7)';
+      el.innerHTML = `<div style="font-weight:800">${it.name}</div><div style="text-align:right"><div>${(it.price? '€'+it.price.toFixed(2): '')}</div><div style="font-size:12px" class="muted">${it.opts||''}</div></div>`;
+      const rem = document.createElement('button');
+      rem.className='btn';
+      rem.textContent='✕';
+      rem.style.marginLeft='12px';
+      rem.onclick = ()=>{ cart.splice(idx,1); saveCart(cart); };
+      el.appendChild(rem);
+      items.appendChild(el);
+    });
+  }
+  qs('#cartCount').textContent = `${cart.length} items`;
+}
+renderCart();
+
+function addToCart(item){
+  cart.push(item);
+  saveCart(cart);
+  animateCartAdd();
+}
+
+/* Checkout simulation */
+qs('#checkoutBtn').addEventListener('click', ()=>{
+  if(!cart.length) { alert('Cart is empty!'); return; }
+  const total = cart.reduce((s,i)=> s + (i.price||0),0);
+  const confirmed = confirm(`Simulate checkout for ${cart.length} items — total €${total.toFixed(2)}?`);
+  if(confirmed){
+    // play confetti + thank you
+    doConfetti();
+    alert('Order simulated! Thank you — your demo order has been placed (local only).');
+    cart = [];
+    saveCart(cart);
+  }
+});
+qs('#clearCartBtn').addEventListener('click', ()=> { cart=[]; saveCart(cart); });
+
+function animateCartAdd(){
+  const btn = qs('#cartCount');
+  btn.animate([{transform:'scale(1)'},{transform:'scale(1.15)'},{transform:'scale(1)'}],{duration:350,easing:'ease-out'});
+}
+
+/* Builder interactions */
+const flavourSelect = qs('#flavourSelect');
+const crunchSelect = qs('#crunchSelect');
+const toppingSelect = qs('#toppingSelect');
+const builderPriceNode = qs('#builderPrice');
+function updateBuilderPrice(){
+  const base = 2.5;
+  const flavour = flavours.find(f=> f.id === flavourSelect.value);
+  const crunch = parseInt(crunchSelect.value);
+  const tweak = toppingSelect.value==='none'?0:0.45;
+  const price = base + (flavour? flavour.price - 2.5 : 0) + (crunch-7)*0.05 + tweak;
+  builderPriceNode.textContent = `€${price.toFixed(2)}`;
+  qs('#builderPreview').innerHTML = chipSVG(flavour ? flavour.name : 'Custom');
+}
+[flavourSelect, crunchSelect, toppingSelect].forEach(e=> e.addEventListener('change', updateBuilderPrice));
+updateBuilderPrice();
+
+qs('#addToCartBtn').addEventListener('click', ()=>{
+  const flavour = flavours.find(f=> f.id === flavourSelect.value);
+  const crunch = crunchSelect.value;
+  const topping = toppingSelect.value;
+  const price = parseFloat(builderPriceNode.textContent.replace('€','')) || (flavour? flavour.price : 3.49);
+  addToCart({name:`Custom — ${flavour.name}`, price, opts:`Crunch ${crunch} • ${topping}`});
+});
+
+qs('#randomizeBtn').addEventListener('click', ()=> {
+  flavourSelect.value = flavours[rand(0,flavours.length-1)].id;
+  crunchSelect.value = [7,9,11][rand(0,2)];
+  toppingSelect.value = ['none','lime','peppercorn','honey'][rand(0,3)];
+  updateBuilderPrice();
+  doChipRain(18);
+});
+
+/* ============================
+   Testimonials generator
+   ============================ */
+const testimonials = [
+  {name:'Jamie R', text:'Loudest chip I have ever heard. Crunchy AF.'},
+  {name:'Sasha K', text:'Brought to a party, left with no bag.'},
+  {name:'Omar P', text:'11/10 would recommend to my enemies.'}
+];
+function renderTestimonials(){
+  const t = qs('#testimonials');
+  testimonials.forEach((tt, i)=>{
+    const card = document.createElement('div');
+    card.className='card';
+    card.style.minWidth='180px';
+    card.innerHTML = `<div style="font-weight:800">${tt.name}</div><div class="muted" style="margin-top:6px">${tt.text}</div>`;
+    t.appendChild(card);
+  });
+}
+renderTestimonials();
+
+/* ============================
+   Contact form (local simulation)
+   ============================ */
+qs('#contactForm').addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const data = {
+    name: qs('#name').value,
+    email: qs('#email').value,
+    subject: qs('#subject').value,
+    message: qs('#message').value,
+    time: new Date().toISOString()
+  };
+  // save to localStorage inbox
+  const inbox = JSON.parse(localStorage.getItem('fof_inbox_v1')||'[]');
+  inbox.push(data);
+  localStorage.setItem('fof_inbox_v1', JSON.stringify(inbox));
+  qs('#contactStatus').textContent = 'Message saved locally — thanks!';
+  qs('#contactForm').reset();
+  doConfetti();
+});
+
+/* Save draft */
+qs('#saveDraft').addEventListener('click', ()=>{
+  const draft = {
+    name: qs('#name').value,
+    email: qs('#email').value,
+    subject: qs('#subject').value,
+    message: qs('#message').value
+  };
+  localStorage.setItem('fof_draft', JSON.stringify(draft));
+  qs('#contactStatus').textContent = 'Draft saved locally.';
+});
+(function loadDraft(){
+  const d = JSON.parse(localStorage.getItem('fof_draft')||'null');
+  if(d){ qs('#name').value=d.name||''; qs('#email').value=d.email||''; qs('#subject').value=d.subject||''; qs('#message').value=d.message||''; }
+})();
+
+/* Newsletter */
+qs('#subscribeBtn').addEventListener('click', ()=>{
+  const e = qs('#newsletterEmail').value;
+  if(!e || !e.includes('@')){ qs('#newsletterMsg').textContent = 'Enter a valid email.'; return; }
+  const list = JSON.parse(localStorage.getItem('fof_news_v1')||'[]');
+  list.push({email:e,time:new Date().toISOString()});
+  localStorage.setItem('fof_news_v1', JSON.stringify(list));
+  qs('#newsletterMsg').textContent = 'Subscribed! (local demo)';
+  qs('#newsletterEmail').value='';
+});
+
+/* Quick order buttons */
+qs('#heroShop').addEventListener('click', ()=> location.href = '#products');
+qs('#heroBuild').addEventListener('click', ()=> location.href = '#builder');
+qs('#quickOrderBtn').addEventListener('click', ()=> qs('#checkoutBtn').click());
+
+/* Random chip rain / confetti */
+function doChipRain(count=24){
+  const overlay = document.createElement('div');
+  overlay.style.position='fixed';overlay.style.inset=0;overlay.style.pointerEvents='none';overlay.style.zIndex=999;
+  document.body.appendChild(overlay);
+  for(let i=0;i<count;i++){
+    const c = document.createElement('div');
+    c.className='chip';
+    c.style.position='absolute';
+    c.style.left = rand(0,100)+'%';
+    c.style.top = '-20px';
+    c.style.width = c.style.height = rand(22,56)+'px';
+    c.style.transform = `rotate(${rand(-45,45)}deg)`;
+    c.style.background = `linear-gradient(180deg, ${chipColors[rand(0,chipColors.length-1)]}, #ffd9bf)`;
+    c.style.opacity = 0.95;
+    overlay.appendChild(c);
+    const fall = c.animate([
+      {transform: c.style.transform + ' translateY(0) rotate(0deg)', opacity:1},
+      {transform: c.style.transform + ` translateY(${window.innerHeight + rand(100,400)}px) rotate(${rand(200,600)}deg)`, opacity:0.9}
+    ], {duration: rand(1200,2500), easing:'cubic-bezier(.2,.8,.2,1)'});
+    fall.onfinish = ()=> c.remove();
+  }
+  setTimeout(()=> overlay.remove(), 2800);
+}
+
+/* Confetti (simple colorful particles) */
+function doConfetti(){
+  const c = document.createElement('canvas');
+  c.width = window.innerWidth; c.height = window.innerHeight;
+  c.style.position='fixed'; c.style.left=0; c.style.top=0; c.style.pointerEvents='none'; c.style.zIndex=9999;
+  document.body.appendChild(c);
+  const ctx = c.getContext('2d');
+  const pieces = [];
+  const colors = ['#ff6b2b','#ffd24d','#5df2b0','#ff4b2b','#ff8b5a','#fff'];
+  for(let i=0;i<120;i++){
+    pieces.push({
+      x: window.innerWidth/2 + rand(-200,200),
+      y: window.innerHeight/2 + rand(-80,80),
+      vx: rand(-12,12)/4,
+      vy: rand(-16,-4)/2,
+      size: rand(6,14),
+      color: colors[rand(0,colors.length-1)],
+      rot: Math.random()*Math.PI,
+      vr: (Math.random()-0.5)*0.2
+    });
+  }
+  let t=0;
+  function step(){
+    t++;
+    ctx.clearRect(0,0,c.width,c.height);
+    pieces.forEach(p=>{
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.4; p.rot += p.vr;
+      ctx.save();
+      ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size*0.6);
+      ctx.restore();
+    });
+    if(t<160) requestAnimationFrame(step);
+    else c.remove();
+  }
+  requestAnimationFrame(step);
+}
+qs('#demoConfetti').addEventListener('click', ()=> { doConfetti(); doChipRain(28); });
+
+/* Small interactive niceties: tilt on hover */
+function attachTilt(){
+  qsa('.tilt').forEach(el=>{
+    el.addEventListener('mousemove', e=>{
+      const r = el.getBoundingClientRect();
+      const px = (e.clientX - r.left)/r.width - 0.5;
+      const py = (e.clientY - r.top)/r.height - 0.5;
+      const rx = py * -6;
+      const ry = px * 10;
+      el.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      const pop = el.querySelector('.pop');
+      if(pop) pop.style.transform = 'translateZ(18px)';
+    });
+    el.addEventListener('mouseleave', ()=> {
+      el.style.transform = '';
+      const pop = el.querySelector('.pop');
+      if(pop) pop.style.transform = '';
+    });
+  });
+}
+attachTilt();
+
+/* Small marquee animation update (ensure fluid) */
+(function marqueeDuplicate(){
+  // duplicate marquee content so it scrolls seamlessly
+  const marqWrapper = qs('.marquee');
+  const inner = marqWrapper.querySelector('#marq');
+  if(inner){
+    const clone = inner.cloneNode(true);
+    inner.parentNode.appendChild(clone);
+  }
+})();
+
+/* keyboard shortcuts for fun */
+window.addEventListener('keydown', (e)=>{
+  if(e.key === 'c'){ doConfetti(); }
+  if(e.key === 'r'){ doChipRain(20); }
+  if(e.key === 'b'){ location.href='#builder'; }
+});
+
+/* small progressive enhancement: load a few extra chips after idle */
+let idle = 0;
+setInterval(()=>{ idle++; if(idle>8){ spawnChips(rand(5,12)); idle=0 } }, 2000);
+document.addEventListener('mousemove', ()=> idle=0);
+
+/* little animation on load */
+window.addEventListener('load', ()=> {
+  // softly pulse hero bag
+  qs('.bag').animate([{transform:'translateY(0) rotate(-6deg)'},{transform:'translateY(-6px) rotate(-4deg)'},{transform:'translateY(0) rotate(-6deg)'}],{duration:5000,iterations:3,easing:'ease-in-out'});
+});
+
+/* Accessibility: focus outlines on keyboard nav */
+document.addEventListener('keydown', (e)=> {
+  if(e.key === 'Tab') document.body.classList.add('show-focus');
+});
+document.addEventListener('mousedown', ()=> document.body.classList.remove('show-focus'));
+
+/* Tiny analytics simulation (local only) */
+(function tinyAnalytics(){
+  const key='fof_analytics_v1';
+  const data = JSON.parse(localStorage.getItem(key)||'{}');
+  data.lastVisit = new Date().toISOString();
+  data.views = (data.views||0)+1;
+  localStorage.setItem(key, JSON.stringify(data));
+})();
+
+/* Prevent forms from navigating away (no backend) */
+qsa('form').forEach(f=>f.addEventListener('submit', (e)=> e.preventDefault()));
+
+/* Make sure templated titles exist (some nodes may depend on class) */
+setTimeout(()=> attachTilt(), 1200);
+
+</script>
+
 </body>
 </html>
